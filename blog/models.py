@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 class Post(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, blank=False, null=False, default=None, on_delete=models.CASCADE)
 
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=1000)
@@ -28,7 +28,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=False, blank=False, default=None, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     text = models.TextField(max_length=100)
