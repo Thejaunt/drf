@@ -14,6 +14,10 @@ from blog.serializers import (
 )
 
 
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.views import SocialLoginView
+
 class IsOwnerOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
@@ -63,3 +67,7 @@ class UserViewSet(viewsets.ModelViewSet):
         post = get_object_or_404(self.queryset, pk=pk)
         serializer = UserDetailSerializer(post, context={"request": request})
         return Response(serializer.data)
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter

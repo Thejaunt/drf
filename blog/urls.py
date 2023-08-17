@@ -6,7 +6,6 @@ from blog.views import PostViewSet, UserViewSet
 
 router = DefaultRouter()
 router.register(r"-posts", PostViewSet, basename="post")
-# router.register(r"-comments", CommentViewSet, basename="comment")
 router.register("-users", UserViewSet, basename="user")
 
 urlpatterns = [
